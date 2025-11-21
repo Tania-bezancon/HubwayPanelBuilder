@@ -47,6 +47,9 @@
   <label for="organization">Organization</label>
   <input id="organization" type="text" placeholder="ex: MRS" />
 
+  <label for="targetPage">Target Page Name</label>
+  <input id="targetPage" type="text" placeholder="ex: Generated Panels" />
+
   <label for="gender">Gender</label>
   <select id="gender">
     <option value="Female">Female</option>
@@ -67,7 +70,8 @@
         qrUrl: $("qrUrl").value.trim(),
         reference: $("reference").value.trim(),
         organization: $("organization").value.trim(),
-        gender: $("gender").value
+        gender: $("gender").value,
+        targetPage: $("targetPage").value.trim()
       };
 
       parent.postMessage({ pluginMessage: message }, "*");
