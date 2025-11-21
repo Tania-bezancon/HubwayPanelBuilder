@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Touchpoint Panel Generator</title>
+  <title>Touchpoint Generator</title>
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: system-ui, sans-serif;
       margin: 12px;
       font-size: 12px;
     }
     label {
       display: block;
-      margin-top: 8px;
-      font-weight: 500;
+      margin-top: 10px;
+      font-weight: 600;
     }
-    input, select {
+    input {
       width: 100%;
+      padding: 6px;
+      margin-top: 4px;
       box-sizing: border-box;
-      margin-top: 2px;
-      padding: 4px;
       font-size: 12px;
     }
     button {
-      margin-top: 12px;
-      padding: 6px 10px;
+      margin-top: 15px;
+      padding: 8px 12px;
       font-size: 12px;
       cursor: pointer;
     }
@@ -31,50 +31,35 @@
       display: flex;
       justify-content: flex-end;
       gap: 8px;
-      margin-top: 12px;
     }
   </style>
 </head>
+
 <body>
-  <h3>Create a Touchpoint Avatar</h3>
+  <h3>Touchpoint Panel Generator</h3>
 
-  <label for="qrUrl">Touchpoint QR URL</label>
-  <input id="qrUrl" type="text" placeholder="ex: https://.../qr/tch_xxx/image" />
-
-  <label for="reference">Reference</label>
-  <input id="reference" type="text" placeholder="ex: AVATAR-3F" />
-
-  <label for="organization">Organization</label>
-  <input id="organization" type="text" placeholder="ex: MRS" />
+  <label for="webhook">Webhook URL</label>
+  <input id="webhook" type="text" placeholder="https://mrs.hubway.ai/api/webhooks/touchpoints" />
 
   <label for="targetPage">Target Page Name</label>
   <input id="targetPage" type="text" placeholder="ex: Generated Panels" />
 
-  <label for="gender">Gender</label>
-  <select id="gender">
-    <option value="Female">Female</option>
-    <option value="Male">Male</option>
-  </select>
-
   <div class="buttons">
     <button id="close">Close</button>
-    <button id="create">Create Panel</button>
+    <button id="create">Generate</button>
   </div>
 
   <script>
     const $ = (id) => document.getElementById(id);
 
     document.getElementById("create").onclick = () => {
-      const message = {
-        type: "create-panel",
-        qrUrl: $("qrUrl").value.trim(),
-        reference: $("reference").value.trim(),
-        organization: $("organization").value.trim(),
-        gender: $("gender").value,
-        targetPage: $("targetPage").value.trim()
-      };
-
-      parent.postMessage({ pluginMessage: message }, "*");
+      parent.postMessage({
+        pluginMessage: {
+          type: "generate",
+          webhook: $("webhook").value.trim(),
+          targetPage: $("targetPage").value.trim()
+        }
+      }, "*");
     };
 
     document.getElementById("close").onclick = () => {

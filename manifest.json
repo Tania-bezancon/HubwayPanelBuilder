@@ -8,7 +8,9 @@
   "networkAccess": {
     "allowedDomains": [
       "https://hubway-mrs-web-dev.fly.dev",
-      "https://hubway.ai"
+      "https://hubway.ai",
+      "https://mrs.hubway.ai",
+      "https://mrs.hubway.ai/api/webhooks/touchpoints"
     ]
   }
 }
