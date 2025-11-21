@@ -1,0 +1,14 @@
+{
+  "name": "Touchpoint Panel Generator (Form)",
+  "id": "touchpoint-panel-generator-form",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": [
+      "https://hubway-mrs-web-dev.fly.dev",
+      "https://hubway.ai"
+    ]
+  }
+}

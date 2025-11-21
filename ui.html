@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Touchpoint Panel Generator</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 12px;
+      font-size: 12px;
+    }
+    label {
+      display: block;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    input, select {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 2px;
+      padding: 4px;
+      font-size: 12px;
+    }
+    button {
+      margin-top: 12px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Create a Touchpoint Avatar</h3>
+
+  <label for="qrUrl">Touchpoint QR URL</label>
+  <input id="qrUrl" type="text" placeholder="ex: https://.../qr/tch_xxx/image" />
+
+  <label for="reference">Reference</label>
+  <input id="reference" type="text" placeholder="ex: AVATAR-3F" />
+
+  <label for="organization">Organization</label>
+  <input id="organization" type="text" placeholder="ex: MRS" />
+
+  <label for="gender">Gender</label>
+  <select id="gender">
+    <option value="Female">Female</option>
+    <option value="Male">Male</option>
+  </select>
+
+  <div class="buttons">
+    <button id="close">Close</button>
+    <button id="create">Create Panel</button>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    document.getElementById("create").onclick = () => {
+      const message = {
+        type: "create-panel",
+        qrUrl: $("qrUrl").value.trim(),
+        reference: $("reference").value.trim(),
+        organization: $("organization").value.trim(),
+        gender: $("gender").value
+      };
+
+      parent.postMessage({ pluginMessage: message }, "*");
+    };
+
+    document.getElementById("close").onclick = () => {
+      parent.postMessage({ pluginMessage: { type: "close" } }, "*");
+    };
+  </script>
+</body>
+</html>
